@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surat Khusus Buat Kamu ❤️</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Sacramento&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+        font-family: "Quicksand", sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-x: hidden;
+        color: #4a4a4a;
+        padding: 20px;
+      }
+
+      /* Layar Pembuka */
+      #pembuka {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ff80ab;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        text-align: center;
+        padding: 20px;
+      }
+
+      #pembuka h1 {
+        color: white;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .btn-awal {
+        background: white;
+        color: #ff4081;
+        border: none;
+        padding: 15px 35px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Konten Kartu */
+      .kartu {
+        background: rgba(255, 255, 255, 0.96);
+        width: 100%;
+        max-width: 480px;
+        padding: 30px 25px;
+        border-radius: 25px;
+        box-shadow: 0 15px 35px rgba(255, 128, 171, 0.3);
+        text-align: center;
+        display: none;
+        position: relative;
+        z-index: 10;
+      }
+
+      .judul-gaya {
+        font-family: "Sacramento", cursive;
+        font-size: 3.5rem;
+        color: #d81b60;
+      }
+
+      /* TOMBOL PUTAR MUSIK (Pusat perhatian) */
+      .tombol-putar-musik {
+        background: #ff4081;
+        color: white;
+        border: none;
+        width: 100%;
+        padding: 16px;
+        margin: 20px 0;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 15px;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+        animation: pulse 1.5s infinite; /* Efek berdenyut biar dipencet */
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.03);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .tombol-putar-musik:disabled {
+        background: #e0e0e0;
+        color: #888;
+        box-shadow: none;
+        animation: none;
+        cursor: default;
+      }
+
+      /* Lirik tersembunyi duluan */
+      #area-rahasia {
+        display: none;
+        text-align: left;
+        margin-top: 15px;
+      }
+
+      .lirik-box {
+        background: #fff0f5;
+        padding: 20px;
+        border-radius: 15px;
+        border-left: 5px solid #ff4081;
+        line-height: 1.6;
+      }
+
+      .lirik {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-top: 10px;
+      }
+      .lirik:first-child {
+        margin-top: 0;
+      }
+
+      .komentar {
+        display: block;
+        font-size: 0.85rem;
+        color: #c2185b;
+        margin-bottom: 12px;
+        font-style: italic;
+      }
+
+      .footer-lucu {
+        margin-top: 25px;
+        font-size: 0.85rem;
+        color: #777;
+        text-align: center;
+      }
+
+      .heart {
+        position: fixed;
+        top: -10vh;
+        font-size: 1.5rem;
+        user-select: none;
+        animation: fall 3s linear forwards;
+        z-index: 1;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Audio ditaruh mode preload -->
+    <audio id="lagu_nadhif" src="lagu.mp3" preload="auto"></audio>
+
+    <!-- GERBANG DEPAN -->
+    <div id="pembuka">
+      <h1>Ada sebuah pesan datang... 💌</h1>
+      <button class="btn-awal" onclick="bukaGerbang()">BUKA PESAN</button>
+    </div>
+
+    <!-- ISI SURAT -->
+    <div class="kartu" id="konten">
+      <div class="judul-gaya">Hai, Manis..</div>
+      <p style="font-size: 0.9rem; color: #666; margin-top: 5px">Sebelum baca ke bawah, wajib pencet tombol ini dulu ya:</p>
+
+      <!-- Tombol Request User -->
+      <button id="btn-musik" class="tombol-putar-musik" onclick="putarMusikDanBukaLirik()">🎵 KLIK DI SINI UNTUK PUTAR LAGU 🎵</button>
+
+      <!-- Lirik & Komentar yang baru muncul pas lagu nyala -->
+      <div id="area-rahasia">
+        <div class="lirik-box">
+          <span class="lirik">"Kan ku arungi tujuh laut samudra..."</span>
+          <span class="komentar">(Dan aku gak akan pernah lelah, selama di ujung samudra itu ada kamu yang menanti)</span>
+
+          <span class="lirik">"Kan ku daki pegunungan Himalaya..."</span>
+          <span class="komentar">(Apapun rintangannya bakal aku lewati, demi bisa terus melihat senyum di wajahmu)</span>
+
+          <span class="lirik">"Karena bersamamu semua terasa indah..."</span>
+          <span class="komentar">(Dunia yang biasa aja ini berubah jadi luar biasa sejak kamu hadir di hidupku)</span>
+
+          <span class="lirik">"Gundah gulana hatiku pun hancur sirna..."</span>
+          <span class="komentar">(Cukup denger suaramu atau baca chatmu, semua capekku langsung hilang)</span>
+
+          <span class="lirik">"Kan ku jadikan kau penjaga hatiku..."</span>
+          <span class="komentar">(Mulai sekarang dan seterusnya, hati ini cuma milik kamu. Dijaga ya? ❤️)</span>
+        </div>
+
+        <div class="footer-lucu">Terima kasih sudah jadi bagian paling indah di hidupku.<br /><b>- Dari orang yang selalu menyayangimu @Al -</b></div>
+      </div>
+    </div>
+
+    <script>
+      function bukaGerbang() {
+        document.getElementById("pembuka").style.display = "none";
+        document.getElementById("konten").style.display = "block";
+      }
+
+      function putarMusikDanBukaLirik() {
+        var lagu = document.getElementById("lagu_nadhif");
+
+        lagu.play();
+
+        // Ubah tampilan tombol musik agar dia tahu lagunya sedang jalan
+        var tombol = document.getElementById("btn-musik");
+        tombol.innerHTML = "🎶 Sedang Memutar: Penjaga Hati 🎶";
+        tombol.disabled = true;
+
+        // Munculkan lirik perlahan
+        document.getElementById("area-rahasia").style.display = "block";
+
+        // Hujan Love dimulai
+        setInterval(buatHati, 350);
+      }
+
+      function buatHati() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        const emojis = ["💖", "🌸", "✨", "💝", "❤️"];
+        heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+    </script>
+  </body>
+</html>
