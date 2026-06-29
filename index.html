@@ -25,7 +25,6 @@
         padding: 20px;
       }
 
-      /* Layar Pembuka */
       #pembuka {
         position: fixed;
         top: 0;
@@ -60,7 +59,6 @@
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
       }
 
-      /* Konten Kartu */
       .kartu {
         background: rgba(255, 255, 255, 0.96);
         width: 100%;
@@ -72,6 +70,7 @@
         display: none;
         position: relative;
         z-index: 10;
+        transition: max-width 0.5s ease;
       }
 
       .judul-gaya {
@@ -80,7 +79,6 @@
         color: #d81b60;
       }
 
-      /* TOMBOL PUTAR MUSIK (Pusat perhatian) */
       .tombol-putar-musik {
         background: #ff4081;
         color: white;
@@ -93,7 +91,7 @@
         border-radius: 15px;
         cursor: pointer;
         box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
-        animation: pulse 1.5s infinite; /* Efek berdenyut biar dipencet */
+        animation: pulse 1.5s infinite;
       }
 
       @keyframes pulse {
@@ -116,11 +114,25 @@
         cursor: default;
       }
 
-      /* Lirik tersembunyi duluan */
       #area-rahasia {
         display: none;
+      }
+
+      .layout-berdua {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 10px;
         text-align: left;
-        margin-top: 15px;
+      }
+
+      @media (min-width: 768px) {
+        .kartu {
+          max-width: 780px;
+        }
+        .layout-berdua {
+          grid-template-columns: 1.1fr 0.9fr;
+        }
       }
 
       .lirik-box {
@@ -129,6 +141,7 @@
         border-radius: 15px;
         border-left: 5px solid #ff4081;
         line-height: 1.6;
+        font-size: 0.95rem;
       }
 
       .lirik {
@@ -140,20 +153,50 @@
       .lirik:first-child {
         margin-top: 0;
       }
-
       .komentar {
         display: block;
-        font-size: 0.85rem;
+        font-size: 0.83rem;
         color: #c2185b;
         margin-bottom: 12px;
         font-style: italic;
       }
 
+      .surat-box {
+        background: #ffffff;
+        padding: 22px;
+        border-radius: 15px;
+        border: 2px dashed #ff80ab;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .surat-box h3 {
+        font-family: "Sacramento", cursive;
+        font-size: 2.2rem;
+        color: #d81b60;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ffeef2;
+        padding-bottom: 5px;
+      }
+
+      .isi-surat {
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.8;
+      }
+
+      /* INI STYLE FOOTERNYA */
       .footer-lucu {
-        margin-top: 25px;
-        font-size: 0.85rem;
-        color: #777;
+        margin-top: 30px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+        font-size: 0.9rem;
+        color: #888;
         text-align: center;
+        width: 100%;
       }
 
       .heart {
@@ -173,44 +216,62 @@
     </style>
   </head>
   <body>
-    <!-- Audio ditaruh mode preload -->
     <audio id="lagu_nadhif" src="lagu.mp3" preload="auto"></audio>
 
-    <!-- GERBANG DEPAN -->
     <div id="pembuka">
       <h1>Ada sebuah pesan datang... 💌</h1>
       <button class="btn-awal" onclick="bukaGerbang()">BUKA PESAN</button>
     </div>
 
-    <!-- ISI SURAT -->
     <div class="kartu" id="konten">
-      <div class="judul-gaya">Hai, Manis..</div>
+      <div class="judul-gaya">Hai, Dind Princes..</div>
       <p style="font-size: 0.9rem; color: #666; margin-top: 5px">Sebelum baca ke bawah, wajib pencet tombol ini dulu ya:</p>
 
-      <!-- Tombol Request User -->
       <button id="btn-musik" class="tombol-putar-musik" onclick="putarMusikDanBukaLirik()">🎵 KLIK DI SINI UNTUK PUTAR LAGU 🎵</button>
 
-      <!-- Lirik & Komentar yang baru muncul pas lagu nyala -->
       <div id="area-rahasia">
-        <div class="lirik-box">
-          <span class="lirik">"Kan ku arungi tujuh laut samudra..."</span>
-          <span class="komentar">(Dan aku gak akan pernah lelah, selama di ujung samudra itu ada kamu yang menanti)</span>
+        <div class="layout-berdua">
+          <!-- BAGIAN KIRI -->
+          <div class="lirik-box">
+            <span class="lirik">"Kan ku arungi tujuh laut samudra..."</span>
+            <span class="komentar">(Dan aku gak akan pernah lelah, selama di ujung samudra itu ada kamu)</span>
 
-          <span class="lirik">"Kan ku daki pegunungan Himalaya..."</span>
-          <span class="komentar">(Apapun rintangannya bakal aku lewati, demi bisa terus melihat senyum di wajahmu)</span>
+            <span class="lirik">"Kan ku daki pegunungan Himalaya..."</span>
+            <span class="komentar">(Apapun rintangannya bakal aku lewati demi lihat kamu senyum)</span>
 
-          <span class="lirik">"Karena bersamamu semua terasa indah..."</span>
-          <span class="komentar">(Dunia yang biasa aja ini berubah jadi luar biasa sejak kamu hadir di hidupku)</span>
+            <span class="lirik">"Karena bersamamu semua terasa indah..."</span>
+            <span class="komentar">(Dunia yang biasa aja ini berubah jadi luar biasa sejak ada kamu)</span>
 
-          <span class="lirik">"Gundah gulana hatiku pun hancur sirna..."</span>
-          <span class="komentar">(Cukup denger suaramu atau baca chatmu, semua capekku langsung hilang)</span>
+            <span class="lirik">"Gundah gulana hatiku pun hancur sirna..."</span>
+            <span class="komentar">(Cukup denger suaramu, semua capekku langsung hilang)</span>
 
-          <span class="lirik">"Kan ku jadikan kau penjaga hatiku..."</span>
-          <span class="komentar">(Mulai sekarang dan seterusnya, hati ini cuma milik kamu. Dijaga ya? ❤️)</span>
+            <span class="lirik">"Kan ku jadikan kau penjaga hatiku..."</span>
+            <span class="komentar">(Hati ini cuma milik kamu. Tolong dijaga baik-baik ya? ❤️)</span>
+          </div>
+
+          <!-- BAGIAN KANAN -->
+          <div class="surat-box">
+            <h3>Teruntuk, Dind Manis...</h3>
+            <div class="isi-surat">
+              <p>Jujur, bikin ginian sedikit memalukan sebenarnya <i>hehe</i>. Tapi lewat halaman sederhana ini, aku cuma mau bilang <b>terima kasih</b>.</p>
+              <br />
+              <p>Terima kasih sudah bertahan sejauh ini. Di tengah dunia yang seringkali berisik, jahat, dan bikin capek, kamu selalu berhasil jadi tempat paling tenang buat aku pulang.</p>
+              <br />
+              <p>Aku nggak janji bisa jadi manusia paling sempurna buat kamu, tapi aku janji bakal selalu mengusahakan yang terbaik supaya kamu nggak merasa sendirian menghadapi dunia.</p>
+              <br />
+              <p>Sehat-sehat terus ya? Dunia ini butuh orang sebaik kamu... <b>dan aku, selalu butuh kamu.</b></p>
+            </div>
+          </div>
         </div>
+        <!-- Akhir layout kiri-kanan -->
 
-        <div class="footer-lucu">Terima kasih sudah jadi bagian paling indah di hidupku.<br /><b>- Dari orang yang selalu menyayangimu @Al -</b></div>
+        <!-- NAH INI DIA FOOTERNYA SUDAH KEMBALI! -->
+        <div class="footer-lucu">
+          jangan lupa senyum terus ya soalnya senyum kamu bikin diabetes<br />
+          <b>— Dari @Al</b>
+        </div>
       </div>
+      <!-- Akhir area rahasia -->
     </div>
 
     <script>
@@ -221,18 +282,13 @@
 
       function putarMusikDanBukaLirik() {
         var lagu = document.getElementById("lagu_nadhif");
-
         lagu.play();
 
-        // Ubah tampilan tombol musik agar dia tahu lagunya sedang jalan
         var tombol = document.getElementById("btn-musik");
         tombol.innerHTML = "🎶 Sedang Memutar: Penjaga Hati 🎶";
         tombol.disabled = true;
 
-        // Munculkan lirik perlahan
         document.getElementById("area-rahasia").style.display = "block";
-
-        // Hujan Love dimulai
         setInterval(buatHati, 350);
       }
 
